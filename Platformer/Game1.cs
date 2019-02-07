@@ -11,7 +11,8 @@ namespace Platformer
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        // My first comment!
+        // Comment 2 doods!
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
