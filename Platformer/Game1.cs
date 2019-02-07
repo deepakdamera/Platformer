@@ -1,7 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+//hellloo
+//jjihjhjkjkdsssddsaSDad
 namespace Platformer
 {
     /// <summary>
@@ -16,6 +17,9 @@ namespace Platformer
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            
+
+
         }
 
         /// <summary>
@@ -27,7 +31,7 @@ namespace Platformer
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            //TEST
             base.Initialize();
         }
 
