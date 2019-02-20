@@ -4,13 +4,23 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Platformer
 {
+
+   
+
+
     public class Game1 : Game
     {
+
+
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         // Title Screen //
         Texture2D titlescreen;
+        Texture2D titlescreen_a;
+        float opacity = 0f;
+        int opacDirection = 1;
         Rectangle TitleScreen = new Rectangle(0, 0, 1920, 1080);
         // Title Screen //
 
@@ -29,7 +39,7 @@ namespace Platformer
 
         }
 
-      
+
         protected override void Initialize()
         {
             
@@ -44,6 +54,7 @@ namespace Platformer
             
             spriteBatch = new SpriteBatch(GraphicsDevice);
             titlescreen = Content.Load<Texture2D>("titlescreen");
+            titlescreen_a = Content.Load<Texture2D>("titlescreen(1)");
 
            
         }
@@ -64,14 +75,26 @@ namespace Platformer
             base.Update(gameTime);
         }
 
-        
+        public float drawTitle(float i)
+        {
+           
+            
+                spriteBatch.Draw(titlescreen, TitleScreen, Color.White*i);
+            if (i > 1f || i<0f)
+                opacDirection *= -1;
+            return i + .01f*opacDirection;
+            
+        }
+
+
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.DarkSeaGreen);
             spriteBatch.Begin();
-
-            spriteBatch.Draw(titlescreen, TitleScreen, Color.White);
-
+           
+            opacity = drawTitle(opacity);
+           
+           
             spriteBatch.End();
             base.Draw(gameTime);
         }
