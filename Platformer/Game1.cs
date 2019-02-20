@@ -8,18 +8,33 @@ namespace Platformer
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        // Title Screen //
+        Texture2D titlescreen;
+        Rectangle TitleScreen = new Rectangle(0, 0, 1920, 1080);
+        // Title Screen //
+
+
         // My first comment!
         // Comment 2 doods!
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            // Sets the game to 1080p fullscreen by default
+            graphics.PreferredBackBufferHeight = 1080;
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.IsFullScreen = true;
+
         }
 
       
         protected override void Initialize()
         {
             
+
+
             base.Initialize();
         }
 
@@ -28,6 +43,7 @@ namespace Platformer
         {
             
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            titlescreen = Content.Load<Texture2D>("titlescreen");
 
            
         }
@@ -51,9 +67,12 @@ namespace Platformer
         
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.DarkSeaGreen);
+            spriteBatch.Begin();
 
+            spriteBatch.Draw(titlescreen, TitleScreen, Color.White);
 
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
