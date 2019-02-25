@@ -16,12 +16,16 @@ namespace Platformer
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        // Title Screen //
+        // Title Screen 
         Texture2D titlescreen;
         Texture2D titlescreen_a;
+      
         float opacity = 0f;
         int opacDirection = 1;
-        Rectangle TitleScreen = new Rectangle(0, 0, 1920, 1080);
+        Rectangle TitleScreen = new 
+
+        // fit user's screen bounds
+            Rectangle(0, 0, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
         // Title Screen //
 
 
