@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 namespace Platformer
 {
 
-
+   
 
 
     public class Game1 : Game
@@ -19,12 +19,12 @@ namespace Platformer
         // Title Screen 
         Texture2D titlescreen;
         Texture2D titlescreen_a;
-
+      
         float opacity = 0f;
         int opacDirection = 1;
-        Rectangle TitleScreen = new
+        Rectangle TitleScreen = new 
 
-            // fit user's screen bounds
+        // fit user's screen bounds
             Rectangle(0, 0, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
         // Title Screen //
 
@@ -46,30 +46,30 @@ namespace Platformer
 
         protected override void Initialize()
         {
-
+            
 
 
             base.Initialize();
         }
 
-
+      
         protected override void LoadContent()
         {
-
+            
             spriteBatch = new SpriteBatch(GraphicsDevice);
             titlescreen = Content.Load<Texture2D>("titlescreen");
             titlescreen_a = Content.Load<Texture2D>("titlescreen(1)");
 
-
+           
         }
 
-
+        
         protected override void UnloadContent()
         {
 
         }
 
-
+        
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -81,13 +81,13 @@ namespace Platformer
 
         public float drawTitle(float i)
         {
-
-
-            spriteBatch.Draw(titlescreen, TitleScreen, Color.White * i);
-            if (i > 1f || i < 0f)
+           
+            
+                spriteBatch.Draw(titlescreen, TitleScreen, Color.White*i);
+            if (i > 1f || i<0f)
                 opacDirection *= -1;
-            return i + .01f * opacDirection;
-
+            return i + .01f*opacDirection;
+            
         }
 
 
@@ -95,10 +95,10 @@ namespace Platformer
         {
             GraphicsDevice.Clear(Color.DarkSeaGreen);
             spriteBatch.Begin();
-
+           
             opacity = drawTitle(opacity);
-
-
+           
+           
             spriteBatch.End();
             base.Draw(gameTime);
         }
