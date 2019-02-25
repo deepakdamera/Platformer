@@ -1,33 +1,55 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using System;
-namespace Theokoles
 
+namespace Platformer
 {
+
+   
+
+
     public class Game1 : Game
     {
+
+
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        // Title Screen 
+        Texture2D titlescreen;
+        Texture2D titlescreen_a;
+      
+        float opacity = 0f;
+        int opacDirection = 1;
+        Rectangle TitleScreen = new 
+
+        // fit user's screen bounds
+            Rectangle(0, 0, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
+        // Title Screen //
+
+
         // My first comment!
         // Comment 2 doods!
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            // Sets the game to 1080p fullscreen by default
+            graphics.PreferredBackBufferHeight = 1080;
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.IsFullScreen = true;
+
         }
 
-      
+
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            
+
 
             base.Initialize();
-            graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width;
-            graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height;
-            graphics.IsFullScreen = true;
-            graphics.ApplyChanges();
         }
 
       
@@ -35,6 +57,8 @@ namespace Theokoles
         {
             
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            titlescreen = Content.Load<Texture2D>("titlescreen");
+            titlescreen_a = Content.Load<Texture2D>("titlescreen(1)");
 
            
         }
@@ -55,12 +79,27 @@ namespace Theokoles
             base.Update(gameTime);
         }
 
-        
+        public float drawTitle(float i)
+        {
+           
+            
+                spriteBatch.Draw(titlescreen, TitleScreen, Color.White*i);
+            if (i > 1f || i<0f)
+                opacDirection *= -1;
+            return i + .01f*opacDirection;
+            
+        }
+
+
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
-
-
+            GraphicsDevice.Clear(Color.DarkSeaGreen);
+            spriteBatch.Begin();
+           
+            opacity = drawTitle(opacity);
+           
+           
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
