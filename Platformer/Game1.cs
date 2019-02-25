@@ -27,7 +27,7 @@ namespace Platformer
         // fit user's screen bounds
             Rectangle(0, 0, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
         // Title Screen //
-
+        GamePadState controller = GamePad.GetState(PlayerIndex.One);
 
         // My first comment!
         // Comment 2 doods!
