@@ -1,8 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using System;
+namespace Theokoles
 
-namespace Platformer
 {
     public class Game1 : Game
     {
@@ -19,8 +21,13 @@ namespace Platformer
       
         protected override void Initialize()
         {
-            
+            // TODO: Add your initialization logic here
+
             base.Initialize();
+            graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width;
+            graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height;
+            graphics.IsFullScreen = true;
+            graphics.ApplyChanges();
         }
 
       
@@ -51,7 +58,7 @@ namespace Platformer
         
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
 
             base.Draw(gameTime);
