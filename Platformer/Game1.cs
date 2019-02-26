@@ -7,7 +7,7 @@ namespace Platformer
 
    
 
-
+    // ??
     public class Game1 : Game
     {
 
@@ -15,6 +15,7 @@ namespace Platformer
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        // if you see this, progress has been made ..
         // trying git cmds
         // Title Screen 
         Texture2D titlescreen;
@@ -66,7 +67,7 @@ namespace Platformer
         
         protected override void UnloadContent()
         {
-
+            
         }
 
         
