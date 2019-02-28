@@ -82,9 +82,9 @@ namespace Platformer
 
         public float drawTitle(float i)
         {
-           
-            
-                spriteBatch.Draw(titlescreen, TitleScreen, Color.White*i);
+
+            spriteBatch.Draw(titlescreen, TitleScreen, Color.White);
+                spriteBatch.Draw(titlescreen_a, TitleScreen, Color.White*i);
             if (i > 1f || i<0f)
                 opacDirection *= -1;
             return i + .01f*opacDirection;
@@ -96,7 +96,7 @@ namespace Platformer
         {
             GraphicsDevice.Clear(Color.DarkSeaGreen);
             spriteBatch.Begin();
-           
+            
             opacity = drawTitle(opacity);
            
            
