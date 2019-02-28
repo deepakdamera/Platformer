@@ -10,30 +10,26 @@ using Microsoft.Xna.Framework.Input;
 namespace Platformer
 {
 
-   
 
-    class Menu : Game
+    public class Menu : Game
     {
+         Texture2D singleplayer;
+
 
         // Single Player
         // Multiplayer
         // Options 
         // Exit
         // Leaderboard
-        protected override void LoadContent()
-        {
-            Texture2D singeplayer = Content.Load<Texture2D>("singleplayer");
-            Texture2D multiplayer = Content.Load<Texture2D>("multiplayer");
-            Texture2D instructions = Content.Load<Texture2D>("instructions");
-            Texture2D exit = Content.Load<Texture2D>("exit");
-        }
+       
 
-        public Texture2D texture;
+        
         public SpriteBatch spritebatch;
-               public Menu(Texture2D texture2D, SpriteBatch batch)
+
+        public Menu(SpriteBatch s)
         {
-            texture = texture2D;
-            spritebatch = batch;
+            spritebatch = s;
+            spritebatch.Draw(singleplayer, new Rectangle(0, 0, 100, 100), Color.AliceBlue);
         }
         
     }

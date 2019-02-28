@@ -102,7 +102,7 @@ namespace Platformer
             
             opacity = drawTitle(opacity);
 
-            Menu m = new Menu(titlescreen, spriteBatch);
+            Menu m = new Menu();
             spriteBatch.Draw(m.texture, TitleScreen, Color.Black);
             spriteBatch.End();
             base.Draw(gameTime);
