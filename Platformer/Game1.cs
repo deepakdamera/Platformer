@@ -28,7 +28,10 @@ namespace Platformer
         // fit user's screen bounds
             Rectangle(0, 0, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
         // Title Screen //
+
+       // Initialize controller/keyboard
         GamePadState controller = GamePad.GetState(PlayerIndex.One);
+        KeyboardState keyboard = Keyboard.GetState();
 
         // My first comment!
         // Comment 2 doods!
@@ -75,7 +78,7 @@ namespace Platformer
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            controller = GamePad.GetState(PlayerIndex.One);
 
             base.Update(gameTime);
         }
@@ -98,8 +101,9 @@ namespace Platformer
             spriteBatch.Begin();
             
             opacity = drawTitle(opacity);
-           
-           
+
+            Menu m = new Menu(titlescreen, spriteBatch);
+            spriteBatch.Draw(m.texture, TitleScreen, Color.Black);
             spriteBatch.End();
             base.Draw(gameTime);
         }
