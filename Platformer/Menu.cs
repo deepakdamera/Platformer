@@ -22,7 +22,8 @@ namespace Platformer
         // Leaderboard
         protected override void LoadContent()
         {
-            //Texture2D singeplayer = Content.Load;
+            Texture2D singeplayer = Content.Load<Texture2D>("singleplayer");
+
         }
 
         public Texture2D texture;
