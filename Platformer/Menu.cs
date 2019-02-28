@@ -9,7 +9,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Platformer
 {
-    class Menu
+
+   
+
+    class Menu : Game
     {
 
         // Single Player
@@ -17,6 +20,10 @@ namespace Platformer
         // Options 
         // Exit
         // Leaderboard
+        protected override void LoadContent()
+        {
+            //Texture2D singeplayer = Content.Load;
+        }
 
         public Texture2D texture;
         public SpriteBatch spritebatch;
