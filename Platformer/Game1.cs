@@ -29,7 +29,10 @@ namespace Platformer
             Rectangle(0, 0, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
         // Title Screen //
 
-       // Initialize controller/keyboard
+
+        Menu m = new Menu();
+
+        // Initialize controller/keyboard
         GamePadState controller = GamePad.GetState(PlayerIndex.One);
         KeyboardState keyboard = Keyboard.GetState();
 
@@ -102,8 +105,8 @@ namespace Platformer
             
             opacity = drawTitle(opacity);
 
-            Menu m = new Menu();
-            spriteBatch.Draw(m.texture, TitleScreen, Color.Black);
+            m.draw(spriteBatch);
+            //spriteBatch.Draw(m.texture, TitleScreen, Color.Black);
             spriteBatch.End();
             base.Draw(gameTime);
         }
