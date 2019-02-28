@@ -23,7 +23,9 @@ namespace Platformer
         protected override void LoadContent()
         {
             Texture2D singeplayer = Content.Load<Texture2D>("singleplayer");
-
+            Texture2D multiplayer = Content.Load<Texture2D>("multiplayer");
+            Texture2D instructions = Content.Load<Texture2D>("instructions");
+            Texture2D exit = Content.Load<Texture2D>("exit");
         }
 
         public Texture2D texture;
