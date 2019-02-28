@@ -105,7 +105,7 @@ namespace Platformer
             
             opacity = drawTitle(opacity);
 
-            m.draw(spriteBatch);
+            //m.draw(spriteBatch);
             //spriteBatch.Draw(m.texture, TitleScreen, Color.Black);
             spriteBatch.End();
             base.Draw(gameTime);
