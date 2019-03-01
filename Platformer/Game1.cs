@@ -47,6 +47,7 @@ namespace Platformer
             graphics.PreferredBackBufferHeight = 1080;
             graphics.PreferredBackBufferWidth = 1920;
             graphics.IsFullScreen = true;
+           
 
         }
 
