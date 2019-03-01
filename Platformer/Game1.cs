@@ -5,9 +5,6 @@ using Microsoft.Xna.Framework.Input;
 namespace Platformer
 {
 
-   
-
-
     public class Game1 : Game
     {
 
@@ -36,7 +33,7 @@ namespace Platformer
             graphics.PreferredBackBufferHeight = 1080;
             graphics.PreferredBackBufferWidth = 1920;
             graphics.IsFullScreen = true;
-           
+            
 
         }
 

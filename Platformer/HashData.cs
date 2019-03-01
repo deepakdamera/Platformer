@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+
+
 namespace Platformer
 {
-    public static class HashData
+    public class HashData
     {
         public HashData()
         {
@@ -11,12 +13,14 @@ namespace Platformer
             {
                 int minSaltLength = 4;
                 int maxSaltLength = 16;
-
                 byte[] SaltBytes = null;
                 if (salt != null)
                 {
                     SaltBytes = salt;
                 }
+               
+
+
                 else
                 {
                     Random r = new Random();
