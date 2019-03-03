@@ -30,7 +30,7 @@ namespace Platformer
         // Title Screen //
 
 
-        Menu m = new Menu();
+        Menu m;
 
         // Initialize controller/keyboard
         GamePadState controller = GamePad.GetState(PlayerIndex.One);
@@ -67,6 +67,8 @@ namespace Platformer
             spriteBatch = new SpriteBatch(GraphicsDevice);
             titlescreen = Content.Load<Texture2D>("titlescreen");
             titlescreen_a = Content.Load<Texture2D>("titlescreen(1)");
+            m = new Menu(spriteBatch);
+            
 
            
         }

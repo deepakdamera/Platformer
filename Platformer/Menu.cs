@@ -26,14 +26,13 @@ namespace Platformer
         
         public SpriteBatch spritebatch;
 
-        public Menu()
-        {
-            ;
-        }
-
-        public void draw(SpriteBatch s)
+        public Menu(SpriteBatch s)
         {
             spritebatch = s;
+        }
+
+        public void draw()
+        {
             spritebatch.Draw(singleplayer, new Rectangle(0, 0, 100, 100), Color.AliceBlue);
 
         }
