@@ -67,7 +67,7 @@ namespace Platformer
             spriteBatch = new SpriteBatch(GraphicsDevice);
             titlescreen = Content.Load<Texture2D>("titlescreen");
             titlescreen_a = Content.Load<Texture2D>("titlescreen(1)");
-            m = new Menu(spriteBatch);
+            m = new Menu(GraphicsDevice);
             
 
            
@@ -107,7 +107,7 @@ namespace Platformer
             spriteBatch.Begin();
             
             opacity = drawTitle(opacity);
-
+            m.draw();
             //m.draw(spriteBatch);
             //spriteBatch.Draw(m.texture, TitleScreen, Color.Black);
             spriteBatch.End();
