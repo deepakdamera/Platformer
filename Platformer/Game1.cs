@@ -35,8 +35,9 @@ namespace Platformer
         // Initialize controller/keyboard
         GamePadState controller = GamePad.GetState(PlayerIndex.One);
         KeyboardState keyboard = Keyboard.GetState();
-
-
+        KeyboardState currentState;
+        KeyboardState previousState;
+        int select = 0;
         Texture2D continueWithoutSaving, exit, instructions, multiplayer, newGame, returnToMainMenu, saveContinue, singePlayer, startGame, tryAgain;
         Point buttonSize = new Point(300, 75);
       
@@ -84,7 +85,8 @@ namespace Platformer
 
             // m = new Menu(GraphicsDevice);
 
-
+            currentState = Keyboard.GetState();
+            previousState = currentState;
 
         }
 
@@ -99,10 +101,65 @@ namespace Platformer
         {
             // Sets the background color    
             GraphicsDevice.Clear(Color.Silver);
-            spriteBatch.Draw(singePlayer, new Rectangle(new Point(graphics.PreferredBackBufferWidth /2-150, 190), buttonSize), Color.White);
-            spriteBatch.Draw(multiplayer, new Rectangle(new Point(graphics.PreferredBackBufferWidth /2-150, 280), buttonSize), Color.White);
-            spriteBatch.Draw(instructions, new Rectangle(new Point(graphics.PreferredBackBufferWidth / 2 - 150, 370), buttonSize), Color.White);
-            spriteBatch.Draw(exit, new Rectangle(new Point(graphics.PreferredBackBufferWidth / 2 - 150, 460), buttonSize), Color.White);
+
+            float[] selected = new float[4];
+            
+
+
+            if (previousState.IsKeyUp(Keys.Up) && currentState.IsKeyDown(Keys.Up))
+            {
+                select -- ;
+            }
+
+            if (previousState.IsKeyUp(Keys.Down) && currentState.IsKeyDown(Keys.Down))
+            {
+                select++;
+            }
+
+
+        
+
+            if (select > 3)
+                select = 0;
+            if (select < 0)
+                select = 3;
+
+            switch (select)
+            {
+                case 0:
+                    selected[0] = 1f;
+                    selected[1] = .5f;
+                    selected[2] = .5f;
+                    selected[3] = .5f;
+                    break;
+                case 1:
+                    selected[0] = .5f;
+                    selected[1] = 1f;
+                    selected[2] = .5f;
+                    selected[3] = .5f;
+                    break;
+                case 2:
+                    selected[0] = .5f;
+                    selected[1] = .5f;
+                    selected[2] = 1f;
+                    selected[3] = .5f;
+                    break;
+                case 3:
+                    selected[0] = .5f;
+                    selected[1] = .5f;
+                    selected[2] = .5f;
+                    selected[3] = 1f;
+                    break;
+            }
+
+            int initial = 200;
+
+            spriteBatch.Draw(titlescreen, new Rectangle(graphics.PreferredBackBufferWidth / 2 - 400, 150, 800, 400), Color.White);
+
+            spriteBatch.Draw(singePlayer, new Rectangle(new Point(graphics.PreferredBackBufferWidth /2-150, initial + 190), buttonSize), Color.White*selected[0]);
+            spriteBatch.Draw(multiplayer, new Rectangle(new Point(graphics.PreferredBackBufferWidth /2-150, initial + 280), buttonSize), Color.White * selected[1]);
+            spriteBatch.Draw(instructions, new Rectangle(new Point(graphics.PreferredBackBufferWidth / 2 - 150, initial + 370), buttonSize), Color.White * selected[2]);
+            spriteBatch.Draw(exit, new Rectangle(new Point(graphics.PreferredBackBufferWidth / 2 - 150, initial + 460), buttonSize), Color.White * selected[3]);
 
 
         }
@@ -112,6 +169,10 @@ namespace Platformer
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             controller = GamePad.GetState(PlayerIndex.One);
+            keyboard = Keyboard.GetState();
+
+            previousState = currentState;
+            currentState = Keyboard.GetState();
 
             base.Update(gameTime);
         }
