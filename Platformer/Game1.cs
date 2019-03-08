@@ -38,7 +38,7 @@ namespace Platformer
 
 
         Texture2D continueWithoutSaving, exit, instructions, multiplayer, newGame, returnToMainMenu, saveContinue, singePlayer, startGame, tryAgain;
-        Point buttonSize; 
+        Point buttonSize = new Point(300, 75);
       
         public Game1()
         {
@@ -81,6 +81,7 @@ namespace Platformer
             singePlayer = Content.Load<Texture2D>("singleplayer");
             startGame = Content.Load<Texture2D>("startgame");
             tryAgain = Content.Load<Texture2D>("tryagain");
+
             // m = new Menu(GraphicsDevice);
 
 
@@ -98,9 +99,14 @@ namespace Platformer
         {
             // Sets the background color    
             GraphicsDevice.Clear(Color.Silver);
-            spriteBatch.Draw(titlescreen, TitleScreen, Color.White);
+            spriteBatch.Draw(singePlayer, new Rectangle(new Point(graphics.PreferredBackBufferWidth /2-150, 190), buttonSize), Color.White);
+            spriteBatch.Draw(multiplayer, new Rectangle(new Point(graphics.PreferredBackBufferWidth /2-150, 280), buttonSize), Color.White);
+            spriteBatch.Draw(instructions, new Rectangle(new Point(graphics.PreferredBackBufferWidth / 2 - 150, 370), buttonSize), Color.White);
+            spriteBatch.Draw(exit, new Rectangle(new Point(graphics.PreferredBackBufferWidth / 2 - 150, 460), buttonSize), Color.White);
+
+
         }
-        
+
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
