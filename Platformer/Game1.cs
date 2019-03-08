@@ -36,6 +36,9 @@ namespace Platformer
         GamePadState controller = GamePad.GetState(PlayerIndex.One);
         KeyboardState keyboard = Keyboard.GetState();
 
+        
+
+
         // My first comment!
         // Comment 2 doods!
         public Game1()
@@ -79,6 +82,13 @@ namespace Platformer
             
         }
 
+
+        public void menu()
+        {
+            // Sets the background color    
+            GraphicsDevice.Clear(Color.Silver);
+            spriteBatch.Draw(titlescreen, TitleScreen, Color.White);
+        }
         
         protected override void Update(GameTime gameTime)
         {
@@ -91,11 +101,12 @@ namespace Platformer
 
         public float drawTitle(float i)
         {
-
+            
             spriteBatch.Draw(titlescreen, TitleScreen, Color.White);
                 spriteBatch.Draw(titlescreen_a, TitleScreen, Color.White*i);
             if (i > 1f || i<0f)
                 opacDirection *= -1;
+           
             return i + .01f*opacDirection;
             
         }
@@ -103,11 +114,13 @@ namespace Platformer
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.DarkSeaGreen);
-            spriteBatch.Begin();
+            GraphicsDevice.Clear(Color.DarkRed);
             
-            opacity = drawTitle(opacity);
-            m.draw();
+            spriteBatch.Begin();
+           
+            menu();
+           // opacity = drawTitle(opacity);
+           // m.draw();
             //m.draw(spriteBatch);
             //spriteBatch.Draw(m.texture, TitleScreen, Color.Black);
             spriteBatch.End();
