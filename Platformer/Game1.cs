@@ -36,16 +36,15 @@ namespace Platformer
         GamePadState controller = GamePad.GetState(PlayerIndex.One);
         KeyboardState keyboard = Keyboard.GetState();
 
-        
 
-
-        // My first comment!
-        // Comment 2 doods!
+        Texture2D continueWithoutSaving, exit, instructions, multiplayer, newGame, returnToMainMenu, saveContinue, singePlayer, startGame, tryAgain;
+        Point buttonSize; 
+      
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
+            
             // Sets the game to 1080p fullscreen by default
             graphics.PreferredBackBufferHeight = 1080;
             graphics.PreferredBackBufferWidth = 1920;
@@ -70,10 +69,22 @@ namespace Platformer
             spriteBatch = new SpriteBatch(GraphicsDevice);
             titlescreen = Content.Load<Texture2D>("titlescreen");
             titlescreen_a = Content.Load<Texture2D>("titlescreen(1)");
-            m = new Menu(GraphicsDevice);
-            
 
-           
+            // Buttons
+            continueWithoutSaving = Content.Load<Texture2D>("continuewithoutsaving");
+            exit = Content.Load<Texture2D>("exit");
+            instructions = Content.Load<Texture2D>("instructions");
+            multiplayer = Content.Load<Texture2D>("multiplayer");
+            newGame = Content.Load<Texture2D>("newgame");
+            returnToMainMenu = Content.Load<Texture2D>("returntomainmenu");
+            saveContinue = Content.Load<Texture2D>("savecontinue");
+            singePlayer = Content.Load<Texture2D>("singleplayer");
+            startGame = Content.Load<Texture2D>("startgame");
+            tryAgain = Content.Load<Texture2D>("tryagain");
+            // m = new Menu(GraphicsDevice);
+
+
+
         }
 
         
