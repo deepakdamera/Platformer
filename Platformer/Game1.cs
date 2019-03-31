@@ -82,7 +82,7 @@ namespace Platformer
             singePlayer = Content.Load<Texture2D>("singleplayer");
             startGame = Content.Load<Texture2D>("startgame");
             tryAgain = Content.Load<Texture2D>("tryagain");
-            scrolling = new Scrolling(Content.Load<Texture2D>("Backgrounds/Background"), new Rectangle(0,0,800,500));
+            scrolling = new Scrolling(Content.Load<Texture2D>("Background"), new Rectangle(0,0,800,500));
             // m = new Menu(GraphicsDevice);
 
             currentState = Keyboard.GetState();
