@@ -7,7 +7,7 @@ namespace Platformer
 
    
 
-    // ??
+   
     public class Game1 : Game
     {
 
@@ -20,13 +20,14 @@ namespace Platformer
         // Title Screen 
         Texture2D titlescreen;
         Texture2D titlescreen_a;
-      
+        Scrolling scrolling1;
+        Scrolling scrolling2;
         float opacity = 0f;
         int opacDirection = 1;
-        Rectangle TitleScreen = new 
+        Rectangle titleScreen = new 
 
         // fit user's screen bounds
-            Rectangle(0, 0, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
+        Rectangle(0, 0, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
         // Title Screen //
 
 
@@ -49,7 +50,7 @@ namespace Platformer
             // Sets the game to 1080p fullscreen by default
             graphics.PreferredBackBufferHeight = 1080;
             graphics.PreferredBackBufferWidth = 1920;
-            graphics.IsFullScreen = true;
+           graphics.IsFullScreen = true;
            
 
         }
@@ -57,9 +58,6 @@ namespace Platformer
 
         protected override void Initialize()
         {
-            
-
-
             base.Initialize();
         }
 
@@ -82,7 +80,8 @@ namespace Platformer
             singePlayer = Content.Load<Texture2D>("singleplayer");
             startGame = Content.Load<Texture2D>("startgame");
             tryAgain = Content.Load<Texture2D>("tryagain");
-
+            scrolling1 = new Scrolling(Content.Load<Texture2D>("background"), new Rectangle(0, 0, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height));
+            scrolling2 = new Scrolling(Content.Load<Texture2D>("background"), new Rectangle(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,0, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height));
             // m = new Menu(GraphicsDevice);
 
             currentState = Keyboard.GetState();
@@ -173,15 +172,25 @@ namespace Platformer
 
             previousState = currentState;
             currentState = Keyboard.GetState();
+            if (scrolling1.rectangle.X + scrolling1.rectangle.Width<=0)
+            {
+                scrolling1.rectangle.X = scrolling2.rectangle.X + scrolling2.rectangle.Width;
+            }
+            if (scrolling2.rectangle.X + scrolling2.rectangle.Width <= 0)
+            {
+                scrolling2.rectangle.X = scrolling1.rectangle.X + scrolling1.rectangle.Width;
+            }
 
+            scrolling1.Update();
+            scrolling2.Update();
             base.Update(gameTime);
         }
 
         public float drawTitle(float i)
         {
             
-            spriteBatch.Draw(titlescreen, TitleScreen, Color.White);
-                spriteBatch.Draw(titlescreen_a, TitleScreen, Color.White*i);
+            spriteBatch.Draw(titlescreen, titleScreen, Color.White);
+                spriteBatch.Draw(titlescreen_a, titleScreen, Color.White*i);
             if (i > 1f || i<0f)
                 opacDirection *= -1;
            
@@ -192,13 +201,15 @@ namespace Platformer
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.DarkRed);
+          //  GraphicsDevice.Clear(Color.CornflowerBlue);
             
             spriteBatch.Begin();
-           
-            menu();
-           // opacity = drawTitle(opacity);
-           // m.draw();
+            scrolling1.Draw(spriteBatch);
+            scrolling2.Draw(spriteBatch);
+            // menu();
+
+            // opacity = drawTitle(opacity);
+            // m.draw();
             //m.draw(spriteBatch);
             //spriteBatch.Draw(m.texture, TitleScreen, Color.Black);
             spriteBatch.End();
