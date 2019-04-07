@@ -33,10 +33,14 @@ public class AnimationManager
 	private Animation()
 	{
 	}
-
+   
     public void Stop()
     {
         timer = 0;
         _animation.CurrFrame = 0;
+    }
+    public void Update(GameTime gameTime)
+    {
+        timer += (float)gameTime.Elapsed.TotalSeconds;
     }
 }
