@@ -7,8 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 namespace Platformer
 {
-    class Animation
+    public class Animation
     {
+       
 
         public int CurrFrame { get; set; }
         public int FrameCount { get; private set; }
@@ -16,12 +17,14 @@ namespace Platformer
         public int FrameSpeed { get; set; }
         public int FrameWidth { get { return Texture.Width / FrameCount; } } 
         public bool isLooping { get; set; }
+
+        public Texture2D Texture { get; private set; }
         public Animation( Texture2D texture, int frameCount)
         {
             Texture = texture;
             FrameCount = frameCount;
             isLooping = true;
-            FrameSpeed = 0.2f;
+            FrameSpeed = (int) 0.75f;
         }
 
     }
