@@ -103,7 +103,9 @@ namespace Platformer
           { "WalkRight", new Animation(Content.Load<Texture2D>("Right"), 8) },
         })
         {
-          Position = new Vector2(100, 100),
+
+          Position = new Vector2((int)(.0732*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width), (int)((0.858)*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height)),
+
           
         },};
             currentState = Keyboard.GetState();
@@ -122,11 +124,9 @@ namespace Platformer
         {
             // Sets the background color    
             GraphicsDevice.Clear(Color.Silver);
-
+           
             float[] selected = new float[4];
             
-
-
             if (previousState.IsKeyUp(Keys.Up) && currentState.IsKeyDown(Keys.Up))
             {
                 select -- ;
@@ -182,7 +182,7 @@ namespace Platformer
             spriteBatch.Draw(instructions, new Rectangle(new Point(graphics.PreferredBackBufferWidth / 2 - 150, initial + 370), buttonSize), Color.White * selected[2]);
             spriteBatch.Draw(exit, new Rectangle(new Point(graphics.PreferredBackBufferWidth / 2 - 150, initial + 460), buttonSize), Color.White * selected[3]);
 
-
+            
         }
 
         protected override void Update(GameTime gameTime)
@@ -240,7 +240,9 @@ namespace Platformer
             // menu control
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            if(Keyboard.GetState().IsKeyDown(Keys.Enter))
+
+            if(Keyboard.GetState().IsKeyDown(Keys.Enter)&&select==0)
+
                 _state =GameState.Level1;
             controller = GamePad.GetState(PlayerIndex.One);
             keyboard = Keyboard.GetState();
@@ -255,6 +257,10 @@ namespace Platformer
 
             // level 1 action
             // enemies & objects
+
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
+
             if (scrolling1.rectangle.X + scrolling1.rectangle.Width <= 0)
             {
                 scrolling1.rectangle.X = scrolling2.rectangle.X + scrolling2.rectangle.Width;
