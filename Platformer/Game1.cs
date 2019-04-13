@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace Platformer
 {
@@ -12,7 +13,12 @@ namespace Platformer
     {
 
 
-
+        enum GameState{
+            MainMenu,
+            Level1,
+            Finish
+        }
+        GameState _state = GameState.MainMenu;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         // if you see this, progress has been made ..
@@ -30,7 +36,7 @@ namespace Platformer
         Rectangle(0, 0, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
         // Title Screen //
 
-
+        private List<Player> _sprites;
         Menu m;
 
         // Initialize controller/keyboard
@@ -41,6 +47,8 @@ namespace Platformer
         int select = 0;
         Texture2D continueWithoutSaving, exit, instructions, multiplayer, newGame, returnToMainMenu, saveContinue, singePlayer, startGame, tryAgain;
         Point buttonSize = new Point(300, 75);
+
+
       
         public Game1()
         {
@@ -82,8 +90,22 @@ namespace Platformer
             tryAgain = Content.Load<Texture2D>("tryagain");
             scrolling1 = new Scrolling(Content.Load<Texture2D>("background"), new Rectangle(0, 0, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height));
             scrolling2 = new Scrolling(Content.Load<Texture2D>("background"), new Rectangle(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,0, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height));
-            // m = new Menu(GraphicsDevice);
+             m = new Menu(GraphicsDevice);
+            var animations = new Dictionary<string,Animation>(){
 
+                {"WalkRight",new Animation(Content.Load<Texture2D>("right"),8)}
+             };
+              _sprites = new List<Player>()
+      {
+        new Player(new Dictionary<string, Animation>()
+        {
+         
+          { "WalkRight", new Animation(Content.Load<Texture2D>("Right"), 8) },
+        })
+        {
+          Position = new Vector2(100, 100),
+          
+        },};
             currentState = Keyboard.GetState();
             previousState = currentState;
 
@@ -165,25 +187,20 @@ namespace Platformer
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-            controller = GamePad.GetState(PlayerIndex.One);
-            keyboard = Keyboard.GetState();
-
-            previousState = currentState;
-            currentState = Keyboard.GetState();
-            if (scrolling1.rectangle.X + scrolling1.rectangle.Width<=0)
-            {
-                scrolling1.rectangle.X = scrolling2.rectangle.X + scrolling2.rectangle.Width;
-            }
-            if (scrolling2.rectangle.X + scrolling2.rectangle.Width <= 0)
-            {
-                scrolling2.rectangle.X = scrolling1.rectangle.X + scrolling1.rectangle.Width;
-            }
-
-            scrolling1.Update();
-            scrolling2.Update();
+            
+            
             base.Update(gameTime);
+            switch (_state)
+            {
+                case GameState.MainMenu:
+                    UpdateMainMenu(gameTime);
+                    break;
+                case GameState.Level1:
+                    UpdateLevel1(gameTime);
+                    break;
+            }
+
+
         }
 
         public float drawTitle(float i)
@@ -198,22 +215,83 @@ namespace Platformer
             
         }
 
-
-        protected override void Draw(GameTime gameTime)
+        protected void DrawMainMenu(GameTime gameTime){ 
+              GraphicsDevice.Clear(Color.CornflowerBlue);
+                spriteBatch.Begin(); //
+            
+             menu();
+            spriteBatch.End(); //
+        }
+        protected void DrawLevel1(GameTime gameTime)
         {
-          //  GraphicsDevice.Clear(Color.CornflowerBlue);
+          
             
             spriteBatch.Begin();
             scrolling1.Draw(spriteBatch);
             scrolling2.Draw(spriteBatch);
-            // menu();
-
-            // opacity = drawTitle(opacity);
-            // m.draw();
-            //m.draw(spriteBatch);
-            //spriteBatch.Draw(m.texture, TitleScreen, Color.Black);
+           
+             foreach (var sprite in _sprites)
+            sprite.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
         }
+
+        void UpdateMainMenu(GameTime gameTime){
+            // menu control
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
+            if(Keyboard.GetState().IsKeyDown(Keys.Enter))
+                _state =GameState.Level1;
+            controller = GamePad.GetState(PlayerIndex.One);
+            keyboard = Keyboard.GetState();
+
+            previousState = currentState;
+            currentState = Keyboard.GetState();
+            base.Update(gameTime);
+
+        }
+
+        void UpdateLevel1(GameTime gameTime){
+
+            // level 1 action
+            // enemies & objects
+            if (scrolling1.rectangle.X + scrolling1.rectangle.Width <= 0)
+            {
+                scrolling1.rectangle.X = scrolling2.rectangle.X + scrolling2.rectangle.Width;
+            }
+            if (scrolling2.rectangle.X + scrolling2.rectangle.Width <= 0)
+            {
+                scrolling2.rectangle.X = scrolling1.rectangle.X + scrolling1.rectangle.Width;
+            }
+            foreach (var sprite in _sprites) {
+
+                sprite.Update(gameTime, _sprites);
+                scrolling1.Update((int)sprite.Xtrans);
+                scrolling2.Update((int)sprite.Xtrans);
+
+               
+            }
+            
+            base.Update(gameTime);
+        }
+
+        protected override void Draw(GameTime gameTime){
+           base.Draw( gameTime);
+            switch(_state)
+             {
+                case GameState.MainMenu:
+                    DrawMainMenu(gameTime);
+                    break;
+                case GameState.Level1:
+                    DrawLevel1(gameTime);
+                    break;
+                case GameState.Finish:
+                   // DrawFinish(gameTime);
+                    break;
+                
+
+             }
+        }
+        
     }
 }
