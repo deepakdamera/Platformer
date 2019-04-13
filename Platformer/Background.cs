@@ -28,9 +28,9 @@ namespace Platformer
             rectangle = newRectangle;
         }
 
-        public void Update()
+        public void Update(int vel)
         {
-            rectangle.X -= 3;
+            rectangle.X -= vel;
         }
 
     }
