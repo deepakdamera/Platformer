@@ -44,8 +44,11 @@ namespace Platformer
     public Vector2 Velocity;
 
 
+
      // x co-ordinate movement
      // using this var for moving background along with the character
+
+
     public int Xtrans=0;
 
     #endregion
@@ -65,10 +68,12 @@ namespace Platformer
     {
       if (Keyboard.GetState().IsKeyDown(Keys.Up))
         Velocity.Y = -Speed;
-      
+
       else if (Keyboard.GetState().IsKeyDown(Keys.Down));
        // Velocity.Y = Speed
       else if (Keyboard.GetState().IsKeyDown(Keys.Left)&&Position.X>50)
+
+
         Velocity.X = -Speed;
       else if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
@@ -111,6 +116,7 @@ namespace Platformer
       _animationManager.Update(gameTime);
       
       Position += Velocity;
+
 
        Xtrans = (int) Velocity.X;
 

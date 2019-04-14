@@ -2,7 +2,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+
 using System;
+
 
 namespace Platformer
 {
@@ -104,7 +106,9 @@ namespace Platformer
           { "WalkRight", new Animation(Content.Load<Texture2D>("Right"), 8) },
         })
         {
+
           Position = new Vector2((int)(.0732*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width), (int)((0.858)*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height)),
+
           
         },};
             currentState = Keyboard.GetState();
@@ -254,8 +258,11 @@ namespace Platformer
 
             // level 1 action
             // enemies & objects
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+
             if (scrolling1.rectangle.X + scrolling1.rectangle.Width <= 0)
             {
                 scrolling1.rectangle.X = scrolling2.rectangle.X + scrolling2.rectangle.Width;
@@ -289,8 +296,7 @@ namespace Platformer
                 case GameState.Finish:
                    // DrawFinish(gameTime);
                     break;
-                
-                    
+
              }
         }
         
