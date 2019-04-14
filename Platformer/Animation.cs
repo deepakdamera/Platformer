@@ -27,8 +27,6 @@ namespace Platformer
 
             FrameSpeed = (int) 0.55f;
 
-            
-
         }
 
     }
