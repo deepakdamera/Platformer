@@ -27,10 +27,11 @@ namespace Platformer
                        Position,
                        new Rectangle(_animation.CurrFrame * _animation.FrameWidth,
                                      0,
-                                     _animation.FrameWidth,
-                                     _animation.FrameHeight),
-                       Color.White);
-    }
+                                    _animation.FrameWidth,
+                                    _animation.FrameHeight),
+                      Color.White);
+           
+        }
 
     public void Play(Animation animation)
     {

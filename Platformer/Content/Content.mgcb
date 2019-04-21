@@ -37,6 +37,18 @@
 /processorParam:TextureFormat=Color
 /build:continuewithoutsaving.png
 
+#begin death.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:death.png
+
 #begin exit.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -49,6 +61,18 @@
 /processorParam:TextureFormat=Color
 /build:exit.png
 
+#begin idle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:idle.png
+
 #begin instructions.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -60,6 +84,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:instructions.png
+
+#begin left.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:left.png
 
 #begin multiplayer.png
 /importer:TextureImporter
@@ -144,6 +180,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:startgame.png
+
+#begin Tile.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tile.png
 
 #begin titlescreen(1).png
 /importer:TextureImporter
