@@ -49,6 +49,7 @@ namespace Platformer
 
         public Vector2 Velocity;
 
+
         Boolean hasJumped = false;
 
 
@@ -75,6 +76,7 @@ namespace Platformer
             if (Keyboard.GetState().IsKeyDown(Keys.Left) && _position.X > 50)
                 Velocity.X = -Speed;
             if (Keyboard.GetState().IsKeyDown(Keys.Right) )
+
             {
                 Velocity.X = Speed;
 
@@ -159,8 +161,10 @@ namespace Platformer
       _animationManager.Update(gameTime);
       
       Position += Velocity;
+
             Xtrans = (int)Velocity.X;
             _prevPos = Position;
+
 
             if (_position.X > GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width/2)
             {

@@ -24,7 +24,9 @@ namespace Platformer
             Texture = texture;
             FrameCount = frameCount;
             isLooping = true;
+
             FrameSpeed = (int) 0.5f;
+
         }
 
     }
