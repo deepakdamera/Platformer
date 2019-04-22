@@ -15,7 +15,9 @@ namespace Platformer
         static void Main()
         {
 
+
             using (var game = new Game1())
+
 
                game.Run();
             //Account  a = new Account("youtube","c2lone");
