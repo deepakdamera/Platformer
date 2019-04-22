@@ -175,8 +175,8 @@ namespace Platformer
         public bool IsTouching(Tile tile,Player sprite
             )
         {
-            return _position.X + this.Velocity.X >= tile.
-                position.X && this._position.Y < tile.position.Y  && this._position.X + this.Velocity.X <= tile.
+            return _position.X +25f +this.Velocity.X >= tile.
+                position.X && this._position.Y < tile.position.Y  && this._position.X + this.Velocity.X +10f<= tile.
                 position.X+Tile.Texture.Width;
                 
              

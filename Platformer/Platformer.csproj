@@ -64,6 +64,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Background.cs" />
+    <Compile Include="HealthBar.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Game1.cs" />
