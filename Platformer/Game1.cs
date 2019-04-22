@@ -41,8 +41,14 @@ namespace Platformer
         Rectangle(0, 0, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
         // Title Screen //
 
-      
-        // 
+
+
+        // Heealth bar
+        HealthBar healthBar;
+        Texture2D healthTexture;
+        Rectangle healthRectangle;
+
+
         private List<Player> _sprites;
 
 
@@ -98,11 +104,15 @@ namespace Platformer
             singePlayer = Content.Load<Texture2D>("singleplayer");
             startGame = Content.Load<Texture2D>("startgame");
             tryAgain = Content.Load<Texture2D>("tryagain");
+            healthBar = new HealthBar(Content.Load<Texture2D>("Health"),new Vector2(400,400),100);
+            healthTexture = Content.Load<Texture2D>("Health");
+
 
             // background
             // so once we scroll through one background we go onto the next
             scrolling1 = new Scrolling(Content.Load<Texture2D>("background"), new Rectangle(0, 0, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height));
             scrolling2 = new Scrolling(Content.Load<Texture2D>("background"), new Rectangle(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, 0, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height));
+
 
             // loading tile textures here
             foreach (var _tile in tiles)
@@ -110,6 +120,7 @@ namespace Platformer
                 Tile.LoadContent(Content, 0);
             }
             
+
 
 
 
@@ -221,6 +232,10 @@ namespace Platformer
             int screenWidth = GraphicsDevice.Viewport.Width;
            // float xPosition = Shared.random.Next(200, screenWidth/2+200);
             tiles.Add(new Tile(new Vector2(200, 600)));
+
+            tiles.Add(new Tile(new Vector2(500, 600)));
+            tiles.Add(new Tile(new Vector2(900, 600)));
+
         }
         protected override void Update(GameTime gameTime)
         {
@@ -267,6 +282,10 @@ namespace Platformer
             spriteBatch.Begin();
             scrolling1.Draw(spriteBatch);
             scrolling2.Draw(spriteBatch);
+
+            spriteBatch.Draw(healthTexture, healthRectangle, Color.DarkSlateBlue);
+
+
 
             foreach (var sprite in _sprites)
                 sprite.Draw(spriteBatch);
@@ -321,11 +340,13 @@ namespace Platformer
            {
 
 
+
                 foreach (var tile in tiles)
                 {
                     _sprites[0].Update(gameTime, _sprites);
                     scrolling1.Update((int)_sprites[0].Xtrans);
                     scrolling2.Update((int)_sprites[0].Xtrans);
+
                     tile.Update(_sprites[0].Xtrans);
                     if (_sprites[0].IsTouching(tile, _sprites[0]))
                     {
@@ -334,7 +355,9 @@ namespace Platformer
                         Vector2 vec = new Vector2(1, tile.position.Y -160f);
                       //  _sprites[0].Velocity
                         //    = vec;
-                        _sprites[0]._position.Y = tile.position.Y - 60f;
+
+                        _sprites[0]._position.Y = tile.position.Y - 56f;
+
 
                     }
                     /* sprite._position.Y = tile.position.Y + sprite._texture.Height;
@@ -351,6 +374,9 @@ namespace Platformer
 
 
                 }
+
+                healthRectangle = new Rectangle(150,50,healthBar.health,60);
+
 
             }
 
