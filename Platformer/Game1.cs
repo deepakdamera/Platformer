@@ -226,10 +226,11 @@ namespace Platformer
             // Initialize() so that it calls this method instead.
 
             int screenWidth = GraphicsDevice.Viewport.Width;
+            int screenHeight = GraphicsDevice.Viewport.Height;
            // float xPosition = Shared.random.Next(200, screenWidth/2+200);
-            tiles.Add(new Tile(new Vector2(200, 600)));
-            tiles.Add(new Tile(new Vector2(500, 600)));
-            tiles.Add(new Tile(new Vector2(900, 600)));
+            tiles.Add(new Tile(new Vector2(200, (float)0.75*screenHeight)));
+            tiles.Add(new Tile(new Vector2(500, (float)0.75*screenHeight)));
+            tiles.Add(new Tile(new Vector2(900, (float)0.75*screenHeight)));
         }
         protected override void Update(GameTime gameTime)
         {
