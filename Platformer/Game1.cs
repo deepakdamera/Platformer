@@ -26,13 +26,14 @@ namespace Platformer
         GameState _state = GameState.MainMenu;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        // if you see this, progress has been made ..
-        // trying git cmds
+        
         // Title Screen 
         Texture2D titlescreen;
         Texture2D titlescreen_a;
         Scrolling scrolling1;
         Scrolling scrolling2;
+
+        // List of tiles to display on platform
         List<Tile> tiles = new List<Tile>();
         int opacDirection = 1;
         Rectangle titleScreen = new
@@ -48,7 +49,7 @@ namespace Platformer
         Texture2D healthTexture;
         Rectangle healthRectangle;
 
-
+        // sprite list
         private List<Player> _sprites;
 
 
@@ -123,8 +124,12 @@ namespace Platformer
 
 
 
-
+            // initiating menu
             m = new Menu(GraphicsDevice);
+
+            // adding animation set
+            // will not be using idle
+            
             var animations = new Dictionary<string, Animation>(){
 
                 {"WalkRight",new Animation(Content.Load<Texture2D>("right"),8)},

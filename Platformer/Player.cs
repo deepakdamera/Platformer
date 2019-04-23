@@ -45,7 +45,7 @@ namespace Platformer
             }
         }
 
-        public float Speed = 3f;
+        public float Speed = 2f;
 
         public Vector2 Velocity;
 
