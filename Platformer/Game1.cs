@@ -62,7 +62,7 @@ namespace Platformer
         KeyboardState previousState;
         int select = 0;
         Texture2D continueWithoutSaving, exit, instructions, multiplayer, newGame, returnToMainMenu, saveContinue, singePlayer, startGame, tryAgain;
-        Point buttonSize = new Point(300, 75);
+        Point buttonSize;
 
         //calculates and stores elapsed time since the game has started
         Rectangle time= new Rectangle(700,100,200,100);
@@ -87,6 +87,9 @@ namespace Platformer
 
         protected override void Initialize()
         {
+            
+
+
             CreateTiles();
             base.Initialize();
         }
@@ -94,6 +97,7 @@ namespace Platformer
 
         protected override void LoadContent()
         {
+            buttonSize = new Point(graphics.PreferredBackBufferWidth * 5 / 32, graphics.PreferredBackBufferHeight * 5/72);
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
             titlescreen = Content.Load<Texture2D>("titlescreen");
@@ -223,14 +227,14 @@ namespace Platformer
             
             int height = graphics.PreferredBackBufferHeight;
             int width = graphics.PreferredBackBufferWidth;
-            int initial = height /6;
+            int initial = height /5;
 
-            spriteBatch.Draw(titlescreen, new Rectangle(width / 2 - 400, 150, 800, 400), Color.White);
+            spriteBatch.Draw(titlescreen, new Rectangle(width / 2 - width/4, height/12, width/2, height/2), Color.White);
 
-            spriteBatch.Draw(singePlayer, new Rectangle(new Point(width / 2 - 150, initial + 190), buttonSize), Color.White * selected[0]);
-            spriteBatch.Draw(multiplayer, new Rectangle(new Point(width / 2 - 150, initial + 280), buttonSize), Color.White * selected[1]);
-            spriteBatch.Draw(instructions, new Rectangle(new Point(width/ 2 - 150, initial + 370), buttonSize), Color.White * selected[2]);
-            spriteBatch.Draw(exit, new Rectangle(new Point(width / 2 - 150, initial + 460), buttonSize), Color.White * selected[3]);
+            spriteBatch.Draw(singePlayer, new Rectangle(new Point(width / 2 - 150, initial + buttonSize.Y + height/20), buttonSize), Color.White * selected[0]);
+            spriteBatch.Draw(multiplayer, new Rectangle(new Point(width / 2 - 150, initial + buttonSize.Y * 2+height/18), buttonSize), Color.White * selected[1]);
+            spriteBatch.Draw(instructions, new Rectangle(new Point(width/ 2 - 150, initial + buttonSize.Y * 3+height/16), buttonSize), Color.White * selected[2]);
+            spriteBatch.Draw(exit, new Rectangle(new Point(width / 2 - 150, initial + buttonSize.Y *4+ height/15), buttonSize), Color.White * selected[3]);
 
             
         }
