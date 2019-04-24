@@ -17,14 +17,6 @@ namespace UnitTestProject1
         private static string password;
 
 
-        public static void Main(string[] args)
-        {
-
-            Initialize();
-
-            // function calls to queries go here   
-        }
-
         //Initialize values
         private static void Initialize()
         {
