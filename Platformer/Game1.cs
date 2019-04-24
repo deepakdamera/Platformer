@@ -64,6 +64,11 @@ namespace Platformer
         Texture2D continueWithoutSaving, exit, instructions, multiplayer, newGame, returnToMainMenu, saveContinue, singePlayer, startGame, tryAgain;
         Point buttonSize = new Point(300, 75);
 
+        //calculates and stores elapsed time since the game has started
+        Rectangle time= new Rectangle(700,100,200,100);
+       
+        float  elapsed_time;
+         private SpriteFont font;
 
 
         public Game1()
@@ -107,7 +112,7 @@ namespace Platformer
             tryAgain = Content.Load<Texture2D>("tryagain");
             healthBar = new HealthBar(Content.Load<Texture2D>("Health"),new Vector2(400,400),100);
             healthTexture = Content.Load<Texture2D>("Health");
-
+            font = Content.Load<SpriteFont>("demo");
 
             // background
             // so once we scroll through one background we go onto the next
@@ -294,7 +299,7 @@ namespace Platformer
 
             spriteBatch.Draw(healthTexture, healthRectangle, Color.DarkSlateBlue);
 
-
+          //  spriteBatch.DrawString(font, elapsed_time.ToString,time,Color.White);
 
             foreach (var sprite in _sprites)
                 sprite.Draw(spriteBatch);
@@ -333,19 +338,13 @@ namespace Platformer
             // level 1 action
             // enemies & objects
 
-            
+            elapsed_time = gameTime.TotalGameTime.Seconds;
+            Console.WriteLine(elapsed_time);
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (scrolling1.rectangle.X + scrolling1.rectangle.Width <= 0)
-            {
-                scrolling1.rectangle.X = scrolling2.rectangle.X + scrolling2.rectangle.Width;
-            }
-            if (scrolling2.rectangle.X + scrolling2.rectangle.Width <= 0)
-            {
-                scrolling2.rectangle.X = scrolling1.rectangle.X + scrolling1.rectangle.Width;
-            }
+           
            {
 
 
@@ -385,7 +384,14 @@ namespace Platformer
                 }
 
                 healthRectangle = new Rectangle(150,50,healthBar.health,60);
-
+                 if (scrolling1.rectangle.X + scrolling1.rectangle.Width <= 0)
+            {
+                scrolling1.rectangle.X = scrolling2.rectangle.X + scrolling2.rectangle.Width;
+            }
+            if (scrolling2.rectangle.X + scrolling2.rectangle.Width <= 0)
+            {
+                scrolling2.rectangle.X = scrolling1.rectangle.X + scrolling1.rectangle.Width;
+            }
 
             }
 
