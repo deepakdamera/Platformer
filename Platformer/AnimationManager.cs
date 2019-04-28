@@ -45,7 +45,21 @@ namespace Platformer
       _timer = 0;
     }
 
-    public void Stop()
+        public void Play(Animation animation, int time)
+        {
+            if (_animation == animation)
+                return;
+
+            _animation = animation;
+
+            _animation.CurrFrame = 0;
+
+            _timer = time;
+        }
+
+
+
+        public void Stop()
     {
       _timer = 0f;
 

@@ -30,7 +30,7 @@ namespace Platformer
 
         public void Update(int vel)
         {
-            rectangle.X -= vel;
+                rectangle.X -= vel;
         }
 
     }

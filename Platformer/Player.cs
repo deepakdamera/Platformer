@@ -17,7 +17,7 @@ namespace Platformer
 
         protected Dictionary<string, Animation> _animations;
 
-        public Vector2 _position;// { get; set; }
+        public Vector2 _position;
 
         protected Vector2 _prevPos;
 
@@ -26,9 +26,15 @@ namespace Platformer
         #endregion
 
         #region Properties
-        private int health { get;set; }
-        private int lives { get; set; }
-        private Boolean isAlive { get; set; }
+
+        private int health;
+        public int Health { get { return health; } set { health = value; } }
+        public int Lives  { get; set; }
+
+        private bool isAlive;
+        public bool IsAlive { get { return isAlive; } set { isAlive = value; } }
+
+        public bool IsAttacking { get; set; }
 
 
 
@@ -73,6 +79,11 @@ namespace Platformer
 
         public virtual void Move()
         {
+
+            if(Keyboard.GetState().IsKeyDown(Keys.E))
+            {
+
+            }
             if (Keyboard.GetState().IsKeyDown(Keys.Left) && _position.X > 50)
                 Velocity.X = -Speed;
             if (Keyboard.GetState().IsKeyDown(Keys.Right) )
@@ -128,12 +139,18 @@ namespace Platformer
                _animationManager.Play(_animations["WalkDown"]);
              else if (Velocity.Y < 0)
                _animationManager.Play(_animations["WalkUp"]);*/
-          
+
 
             else if (Velocity.X < 0)
-                
+
             {
                 _animationManager.Play(_animations["WalkLeft"]);
+            }
+
+            else if (IsAttacking)
+            {
+                _animationManager.Play(_animations["attack"]);
+
             }
             else _animationManager.Stop();
         }
@@ -143,6 +160,8 @@ namespace Platformer
     {
       _animations = animations;
       _animationManager = new AnimationManager(_animations.First().Value);
+            health = 100;
+            IsAlive = true;
     }
 
     public Player(Texture2D texture)
@@ -154,6 +173,8 @@ namespace Platformer
     
     public virtual void Update(GameTime gameTime, List<Player> sprites)
     {
+
+        
       Move();
 
       SetAnimations();
@@ -166,9 +187,9 @@ namespace Platformer
             _prevPos = Position;
 
 
-            if (_position.X > GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width/2)
+            if (_position.X > GraphicsDeviceManager.DefaultBackBufferWidth)
             {
-                _position.X= (float)(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2);
+                _position.X= (float)(GraphicsDeviceManager.DefaultBackBufferWidth / 2);
             }
 
             Velocity = Vector2.Zero;
@@ -189,7 +210,13 @@ namespace Platformer
              
         }
 
-       
+       public void CheckHealth()
+        {
+            if (this.Health <= 0)
+            {
+                IsAlive = false;
+            }
+        }
 
         #endregion
 
