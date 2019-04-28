@@ -13,11 +13,16 @@ namespace Platformer
     {
         #region Fields
 
+
+        GraphicsDeviceManager graphics;
+
         protected AnimationManager _animationManager;
 
         protected Dictionary<string, Animation> _animations;
 
         public Vector2 _position;
+
+        public bool Contact = false;
 
         protected Vector2 _prevPos;
 
@@ -49,16 +54,25 @@ namespace Platformer
                 if (_animationManager != null)
                     _animationManager.Position = _position;
             }
-        }
 
-        public float Speed = 2f;
+        }
+        public float Speed = 1f;
+
 
         public Vector2 Velocity;
+
+        public Vector2 Acceleration = new Vector2(9.8f,0);
 
 
         Boolean hasJumped = false;
 
+        public Boolean jumping = false;
 
+        int jumpCount = 0;
+
+        Boolean falling = false;
+
+        public bool grounded = false;
 
         // x co-ordinate movement
         // using this var for moving background along with the character
@@ -67,6 +81,12 @@ namespace Platformer
         #endregion
 
         #region Methods
+
+        public void Gravity()
+            {
+                ;
+            }
+
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
@@ -93,31 +113,43 @@ namespace Platformer
 
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && hasJumped == false)
+            // Jump
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && grounded)
             {
-                Velocity.X = 15f;
-                _position.Y -= 170f;
-                Velocity.Y = 3f*10;
+                //Velocity.X = 15f;
+                //_position.Y -= 170f;
+                // Velocity.Y = 3f*10;
+                if (jumpCount == 0)
+                    jumpCount = 75;
+                jumping = true;
+                grounded = false;
                 hasJumped = true;
+                //hasJumped = true;
 
             }
 
-            if (hasJumped == true)
+            if (jumpCount > 0)
             {
-                float i = 10;
-                Velocity.Y += 0.25f * i;
+               
+                    jumpCount--;
+                // jump speed
+                _position.Y -= 3.5f;
 
+                if (jumpCount == 0)
+                {
+                    
+                    hasJumped = false;
+                    jumping = false;
+                }
+            }                   
 
-
-
-            }
-            if (_position.Y > (0.858) * GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height)
-            {
-                hasJumped = false;
-            }
+          
+          
+            /*if (_position.Y < (.7) * GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height)
+                _position.Y ++;*/
             if (hasJumped == false)
             {
-                Velocity.Y = 0f;
+               // Velocity.Y = 0f;
                 //Velocity.X = 0f;
 
 
@@ -156,8 +188,9 @@ namespace Platformer
         }
         
 
-    public Player(Dictionary<string, Animation> animations)
+    public Player(Dictionary<string, Animation> animations, GraphicsDeviceManager g)
     {
+      graphics = g;
       _animations = animations;
       _animationManager = new AnimationManager(_animations.First().Value);
             health = 100;
@@ -181,16 +214,21 @@ namespace Platformer
 
       _animationManager.Update(gameTime);
       
+            // Removed for testing
       Position += Velocity;
 
             Xtrans = (int)Velocity.X;
+            // Testing movement
+            //Xtrans = (int)_position.X;
             _prevPos = Position;
 
 
-            if (_position.X > GraphicsDeviceManager.DefaultBackBufferWidth)
+
+            if (_position.X > graphics.PreferredBackBufferWidth/2)
             {
-                _position.X= (float)(GraphicsDeviceManager.DefaultBackBufferWidth / 2);
-            }
+                _position.X= (float)(graphics.PreferredBackBufferWidth / 2);
+
+
 
             Velocity = Vector2.Zero;
 
@@ -206,9 +244,25 @@ namespace Platformer
 
           
                 position.X+Tile.Texture.Width;
+
                 
              
         }
+
+
+       // Returns true if player is on top the tile, false otherwise
+        public bool tileTouching(Tile tile, Player player)
+            {
+                // Checks if the player is in bounds horizontally 
+                if ((player._position.X >= tile.position.X) && (player._position.X <= tile.position.X + Tile.Texture.Width))
+                    // Checks if the player is at the right height 
+                    if ((player._position.Y <= tile.position.Y))
+                        return true;
+                    else 
+                        return false; 
+                else 
+                    return false;
+            }   
 
        public void CheckHealth()
         {
@@ -217,6 +271,7 @@ namespace Platformer
                 IsAlive = false;
             }
         }
+
 
         #endregion
 

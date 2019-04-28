@@ -25,7 +25,7 @@ namespace Platformer
             FrameCount = frameCount;
             isLooping = true;
 
-            FrameSpeed = (int) 0.5f;
+            FrameSpeed = (int) 1f;
 
         }
 

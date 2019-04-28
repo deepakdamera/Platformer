@@ -11,7 +11,7 @@ namespace Platformer
 {
     class Tile
     {
-
+        public bool beingTouched = false;
         public static Texture2D Texture { get; set; }
         public Vector2 position;
         public void Draw(SpriteBatch spriteBatch)
